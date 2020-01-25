@@ -5,9 +5,10 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Random;
 
-public class EnemyBossBullet extends GameObject {
+public class EnemyBossBullet extends GameObject implements Spawnable{
 
 	private Handler handler;
+	private Spawn spawn = new Spawn();
 	Random r = new Random();
 	
 	public EnemyBossBullet(float x, float y, ID id, Handler handler) {
@@ -30,7 +31,7 @@ public class EnemyBossBullet extends GameObject {
 		
 		if(y >= Game.HEIGHT) handler.removeObject(this);
 		
-		handler.addObject(new Trail(x, y, ID.Trail, Color.red, 16, 16, 0.02f, handler));
+		spawn.spawnTrail(handler,x,y,Color.red);
 	}
 
 	//Make their color and size

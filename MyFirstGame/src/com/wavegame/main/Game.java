@@ -17,8 +17,9 @@ public class Game extends Canvas implements Runnable {
 	private Random r;
 	private Handler handler;
 	private HUD hud;
-	private Spawn spawner;
+	private GameSpawn spawner;
 	private Menu menu;
+	private Spawn spawn = new Spawn();
 	
 	public enum STATE {
 		Menu,
@@ -36,15 +37,11 @@ public class Game extends Canvas implements Runnable {
 		this.addKeyListener(new KeyInput(handler));
 		this.addMouseListener(menu);
 		new Window(WIDTH, HEIGHT, "Waves game.", this);
-		spawner = new Spawn(handler, hud);
+		spawner = new GameSpawn(handler, hud);
 		r = new Random();
-		
-		if(gameState == STATE.Game){
-			handler.addObject(new Player(WIDTH/2-32, HEIGHT/2-32, ID.Player, handler));
-			handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.BasicEnemy, handler));
-		} else {
-			for (int i = 0; i < 20; i++){
-				handler.addObject(new MenuParticle(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.MenuParticle, handler));
+		if(gameState == STATE.Menu){
+			for (int i = 0; i < 30; i++){
+			spawn.menuParticlesSpawn(handler);
 			}
 		}
 	}
@@ -94,8 +91,7 @@ public class Game extends Canvas implements Runnable {
 		else
 			return var;
 	}
-	
-	//Don't know what is that
+
 	public void run(){
 		this.requestFocus();
 		long lastTime = System.nanoTime();
@@ -116,11 +112,11 @@ public class Game extends Canvas implements Runnable {
                                 render();
                             frames++;
                             
-                            if(System.currentTimeMillis() - timer > 1000){
+                           /* if(System.currentTimeMillis() - timer > 1000){
                                 timer += 1000;
-                                //System.out.println("FPS: "+ frames);
+                                System.out.println("FPS: "+ frames);
                                 frames = 0;
-                            }
+                            }*/
         }
                 stop();
 	}
@@ -134,9 +130,9 @@ public class Game extends Canvas implements Runnable {
 			if(HUD.HEALTH <= 0){
 				HUD.HEALTH = 100;
 				gameState = STATE.End;
-				handler.clearEnemys();
+				handler.clearEnemies();
 				for (int i = 0; i < 20; i++){
-					handler.addObject(new MenuParticle(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.MenuParticle, handler));
+					spawn.menuParticlesSpawn(handler);
 				}
 			}
 			

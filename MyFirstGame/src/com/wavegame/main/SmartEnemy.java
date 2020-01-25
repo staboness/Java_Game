@@ -4,16 +4,19 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class SmartEnemy extends GameObject {
+public class SmartEnemy extends GameObject implements Spawnable {
 
 	private Handler handler;
 	private GameObject player;
+	private Spawn spawn = new Spawn();
 	
 	public SmartEnemy(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
 		this.handler = handler;
 		for (int i = 0; i < handler.object.size(); i++){
-			if(handler.object.get(i).getId() == ID.Player) player = handler.object.get(i);
+			if(handler.object.get(i).getId() == ID.Player) {
+				player = handler.object.get(i);
+			}
 		}
 	}
 
@@ -36,7 +39,7 @@ public class SmartEnemy extends GameObject {
 		if(y <= 0 || y >= Game.HEIGHT - 48) velY *= -1;
 		if(x <= 0 || x >= Game.WIDTH - 20) velX *= -1;
 		
-		handler.addObject(new Trail(x, y, ID.Trail, Color.green, 16, 16, 0.02f, handler));
+		spawn.spawnTrail(handler, x, y, Color.green);
 	}
 
 	//Make their color and size

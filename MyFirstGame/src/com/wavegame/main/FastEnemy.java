@@ -4,9 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class FastEnemy extends GameObject {
+public class FastEnemy extends GameObject implements Spawnable {
 
 	private Handler handler;
+	private Spawn spawn = new Spawn();
 	
 	public FastEnemy(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
@@ -26,7 +27,7 @@ public class FastEnemy extends GameObject {
 		if(y <= 0 || y >= Game.HEIGHT - 48) velY *= -1;
 		if(x <= 0 || x >= Game.WIDTH - 20) velX *= -1;
 		
-		handler.addObject(new Trail(x, y, ID.Trail, Color.CYAN, 16, 16, 0.02f, handler));
+		spawn.spawnTrail(handler,x,y,Color.cyan);
 	}
 
 	//Make their color and size

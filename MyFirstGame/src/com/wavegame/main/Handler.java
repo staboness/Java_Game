@@ -1,6 +1,7 @@
 package com.wavegame.main;
 
 import java.awt.Graphics;
+import java.lang.ref.PhantomReference;
 import java.util.LinkedList;
 //Needed to update game objects
 public class Handler {
@@ -21,17 +22,20 @@ public class Handler {
 		}
 	}
 	
-	public void clearEnemys(){
+	public void clearEnemies(){
 		for (int i = 0; i < object.size(); i++){
-			GameObject tempObject = object.get(i);
 			object.clear();
-			if (Game.gameState != Game.STATE.End)
-			addObject(new Player((int)tempObject.getX(), (int)tempObject.getY(), ID.Player, this));
 		}
 	}
 	
 	public void addObject(GameObject object){
 		this.object.add(object);
+		/* Debugging
+		for (int i = 0; i < this.object.size(); i++){
+			if (this.object.get(i).getId() == ID.Player) {
+				System.out.println(this.object.get(i).getId());
+			}
+		}*/
 	}
 	
 	public void removeObject(GameObject object){
