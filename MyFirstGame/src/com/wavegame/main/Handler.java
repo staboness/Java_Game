@@ -1,9 +1,8 @@
 package com.wavegame.main;
 
 import java.awt.Graphics;
-import java.lang.ref.PhantomReference;
 import java.util.LinkedList;
-//Needed to update game objects
+//Handling all gameobjects
 public class Handler {
 	
 	LinkedList<GameObject> object = new LinkedList<GameObject>();

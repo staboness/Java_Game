@@ -25,7 +25,6 @@ public class Player extends GameObject implements Spawnable {
 		
 		x = Game.clamp(x, 0, Game.WIDTH - 39);
 		y = Game.clamp(y, 0, Game.HEIGHT - 61);
-		
 		collision();
 	}
 	private void collision(){

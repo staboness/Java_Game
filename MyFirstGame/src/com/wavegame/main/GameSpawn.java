@@ -8,6 +8,8 @@ public class GameSpawn {
 	private HUD hud;
 	private Random r = new Random();
 	private Spawn spawn = new Spawn();
+	private GameObject player;
+	private float playerXPos, playerYPos;
 	private int scoreKeep = 0;
 	
 	public GameSpawn(Handler handler, HUD hud){
@@ -37,7 +39,15 @@ public class GameSpawn {
 			} else if(hud.getLevel() == 9){
 				spawn.spawnBasic(handler);
 			} else if(hud.getLevel() == 10){
+				for (int i = 0; i < handler.object.size(); i++){
+					if (handler.object.get(i).getId() == ID.Player){
+						player = handler.object.get(i);
+						playerXPos = player.getX();
+						playerYPos = player.getY();
+					}
+				}
 				handler.clearEnemies();
+				handler.addObject(new Player(playerXPos, playerXPos, ID.Player, handler));
 				spawn.bossSpawn(handler);
 			}
 		}
