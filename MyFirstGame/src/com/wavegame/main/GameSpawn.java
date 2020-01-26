@@ -47,7 +47,7 @@ public class GameSpawn {
 					}
 				}
 				handler.clearEnemies();
-				handler.addObject(new Player(playerXPos, playerXPos, ID.Player, handler));
+				handler.addObject(new Player(playerXPos, playerYPos, ID.Player, handler));
 				spawn.bossSpawn(handler);
 			}
 		}

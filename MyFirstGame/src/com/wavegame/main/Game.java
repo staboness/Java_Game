@@ -40,7 +40,7 @@ public class Game extends Canvas implements Runnable {
 		spawner = new GameSpawn(handler, hud);
 		r = new Random();
 		if(gameState == STATE.Menu){
-			for (int i = 0; i < 30; i++){
+			for (int i = 0; i < 10; i++){
 			spawn.menuParticlesSpawn(handler);
 			}
 		}
